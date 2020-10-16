@@ -13,24 +13,15 @@
 <body>
     <div class="container">
         <h1>Leitor de arquivos - Shosp</h1>
-        <button onclick="gerarGelatorio()">Gerar relatório a partir de CSV</button>
+        <form id="formu" method="post" action="cadastra.php">
+           <input type="submit" id="enviar" value="Gerar relatório a partir de arquivo CSV">
+        </form>
         <table id="pacientes">
 
         </table>
     </div>
 
 </body>
-<script>
-    function gerarGelatorio(){
-        $.ajax({
-            url: 'http://localhost/teste-pratico-dev-estagio-php/cadastra.php',
-            sucess: function (response){
-                console.log(response)
-            }
-        }).done(function (msg){
-            console.log(msg)
-        })
-    }
-</script>
+
 
 </html>

@@ -1,5 +1,14 @@
 <?php
 
+class EmailInvalidoException extends Exception{
+
+}
+class NascimentoInvalidoException extends Exception{
+
+}
+class CpfInvalidoException extends Exception{
+
+}
 
 class Paciente
 {
@@ -31,6 +40,9 @@ class Paciente
      * @9 $cep
      * @10 $cpf
      * @11 $frkPlano
+     * @throws EmailInvalidoException
+     * @throws NascimentoInvalidoException
+     * @throws CpfInvalidoException
      */
 
 
@@ -38,7 +50,17 @@ class Paciente
     {
         $this->nome = $nome;
         $this->sobrenome = $sobrenome;
+
+        $arr_mail = substr_count($email,"@");
+        if($arr_mail > 1 || $arr_mail == 0){
+            throw new EmailInvalidoException("Email inválido");
+        }
         $this->email = $email;
+
+
+        if(!$this->validateDate($nasc)){
+            throw new NascimentoInvalidoException("Data inválida");
+        }
         $this->nasc = $nasc;
         $this->genro = $genro;
         $this->sang = $sang;
@@ -46,18 +68,19 @@ class Paciente
         $this->cidade = $cidade;
         $this->estado = $estado;
         $this->cep = $cep;
+
+        if(strlen($cpf) != 11){
+            throw new CpfInvalidoException("CPF INVALIDO");
+        }
         $this->cpf = $cpf;
+
         $this->frkPlano = $frkPlano;
     }
 
 
 
-    public function toString(){
-            return $this->nome . $this->sobrenome . $this->email . $this->nasc . $this->genro . $this->sang
-            . $this->endereco . $this->cidade . $this->endereco . $this->cep . $this->cpf . $this->frkPlano;
-    }
     /**
-     * @return mixed
+     * @return string
      */
     public function getNome()
     {
@@ -65,7 +88,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSobrenome()
     {
@@ -73,7 +96,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -81,7 +104,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getNasc()
     {
@@ -89,7 +112,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getGenro()
     {
@@ -97,7 +120,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSang()
     {
@@ -105,7 +128,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEndereco()
     {
@@ -113,7 +136,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCidade()
     {
@@ -121,7 +144,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEstado()
     {
@@ -129,7 +152,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCep()
     {
@@ -137,7 +160,7 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCpf()
     {
@@ -145,11 +168,17 @@ class Paciente
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getFrkPlano()
     {
         return $this->frkPlano;
+    }
+
+    function validateDate($date, $format = 'd/m/Y')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 
 
