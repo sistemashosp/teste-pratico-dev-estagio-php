@@ -1,0 +1,19 @@
+input{
+    display: block;
+    margin: 0 auto 15px;
+}
+.container{
+    width: 960px;
+    margin: 0 auto;
+    text-align: center;
+    background: white;
+}
+body{
+    background: #2197f4;
+}
+h1{
+    color: #ffa726;
+}
+.tabela{
+    border: 1px solid red;
+}
