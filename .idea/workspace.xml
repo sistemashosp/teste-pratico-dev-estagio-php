@@ -48,7 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602792703672</updated>
       <workItem from="1602792704853" duration="35922000" />
-      <workItem from="1602873242638" duration="3376000" />
+      <workItem from="1602873242638" duration="12216000" />
     </task>
     <servers />
   </component>
@@ -56,10 +56,14 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="633" y="214" key="#com.intellij.ide.util.MemberChooser" timestamp="1602800235922">
+    <state x="633" y="214" key="#com.intellij.ide.util.MemberChooser" timestamp="1602885909440">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state x="633" y="214" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1010@0.0.1680.1010" timestamp="1602800235922" />
+    <state x="633" y="214" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1010@0.0.1680.1010" timestamp="1602885909440" />
+    <state x="309" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602886111227">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="309" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1602886111227" />
     <state x="596" y="228" key="NewPhpClassDialog" timestamp="1602796542583">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
@@ -68,5 +72,9 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="496" y="233" key="run.anything.popup/0.0.1680.1010@0.0.1680.1010" timestamp="1602873448053" />
+    <state x="503" y="217" key="search.everywhere.popup" timestamp="1602885546912">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="503" y="217" key="search.everywhere.popup/0.0.1680.1010@0.0.1680.1010" timestamp="1602885546912" />
   </component>
 </project>

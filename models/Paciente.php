@@ -16,67 +16,57 @@ class Paciente
     private $nome;
     private $sobrenome;
     private $email;
-    private $nasc;
-    private $genro;
-    private $sang;
+    private $data_nascimento;
+    private $genero;
+    private $fator_rh;
     private $endereco;
     private $cidade;
     private $estado;
     private $cep;
     private $cpf;
-    private $frkPlano;
+
 
     /**
      * Paciente constructor.
-     * @0 $nome
-     * @1 $sobrenome
-     * @2 $email
-     * @3 $nasc
-     * @4 $genro
-     * @5 $sang
-     * @6 $endereco
-     * @7 $cidade
-     * @8 $estado
-     * @9 $cep
-     * @10 $cpf
-     * @11 $frkPlano
+     * @param string $nome
+     * @param string $sobrenome
+     * @param string $email
+     * @param string $data_nascimento
+     * @param string $genero
+     * @param string $fator_rh
+     * @param string $endereco
+     * @param string $cidade
+     * @param string $estado
+     * @param string $cep
+     * @param string $cpf
      * @throws EmailInvalidoException
-     * @throws NascimentoInvalidoException
      * @throws CpfInvalidoException
+     * @throws NascimentoInvalidoException
      */
-
-
-    public function __construct($nome, $sobrenome, $email, $nasc, $genro, $sang, $endereco, $cidade, $estado, $cep, $cpf, $frkPlano)
+    public function __construct($nome, $sobrenome, $email, $data_nascimento, $genero, $fator_rh, $endereco, $cidade, $estado, $cep, $cpf)
     {
-        $this->nome = $nome;
-        $this->sobrenome = $sobrenome;
-
-        $arr_mail = substr_count($email,"@");
-        if($arr_mail > 1 || $arr_mail == 0){
+        $arrobas_email = substr_count($email,"@");
+        if($arrobas_email > 1 || $arrobas_email == 0){
             throw new EmailInvalidoException("Email inválido");
         }
-        $this->email = $email;
-
-
-        if(!$this->validateDate($nasc)){
+        if(strlen($cpf) != 11){
+            throw new CpfInvalidoException("CPF INVALIDO");
+        }
+        if(!$this->validateDate($data_nascimento)){
             throw new NascimentoInvalidoException("Data inválida");
         }
-        $this->nasc = $nasc;
-        $this->genro = $genro;
-        $this->sang = $sang;
+        $this->nome = $nome;
+        $this->sobrenome = $sobrenome;
+        $this->email = $email;
+        $this->data_nascimento = $data_nascimento;
+        $this->genero = $genero;
+        $this->fator_rh = $fator_rh;
         $this->endereco = $endereco;
         $this->cidade = $cidade;
         $this->estado = $estado;
         $this->cep = $cep;
-
-        if(strlen($cpf) != 11){
-            throw new CpfInvalidoException("CPF INVALIDO");
-        }
         $this->cpf = $cpf;
-
-        $this->frkPlano = $frkPlano;
     }
-
 
 
     /**
@@ -106,25 +96,25 @@ class Paciente
     /**
      * @return string
      */
-    public function getNasc()
+    public function getDatanascimento()
     {
-        return $this->nasc;
+        return $this->data_nascimento;
     }
 
     /**
      * @return string
      */
-    public function getGenro()
+    public function getGenero()
     {
-        return $this->genro;
+        return $this->genero;
     }
 
     /**
      * @return string
      */
-    public function getSang()
+    public function getFatorrh()
     {
-        return $this->sang;
+        return $this->fator_rh;
     }
 
     /**
@@ -167,14 +157,13 @@ class Paciente
         return $this->cpf;
     }
 
-    /**
-     * @return string
-     */
-    public function getFrkPlano()
-    {
-        return $this->frkPlano;
-    }
 
+
+    /**
+     * @param DateTime $date
+     * @param string $format
+     * @return boolean
+     */
     function validateDate($date, $format = 'd/m/Y')
     {
         $d = DateTime::createFromFormat($format, $date);
