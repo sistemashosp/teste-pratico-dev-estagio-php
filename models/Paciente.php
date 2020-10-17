@@ -54,7 +54,7 @@ class Paciente
             throw new CpfInvalidoException("CPF INVALIDO");
         }
         $ano_nascimento = intval(substr($data_nascimento, -4));
-        if(!Validador::validateDate($data_nascimento) || $ano_nascimento > date('Y')){
+        if(!Validador::validarData($data_nascimento) || $ano_nascimento > date('Y')){
             throw new NascimentoInvalidoException("Nascimento invalido");
         }
         $this->nome = $nome;
@@ -144,48 +144,8 @@ class Paciente
     public function getCpf(){
         return $this->cpf;
     }
-    /**
-     * @param string $date
-     * @param string $format
-     * @return boolean
-     */
-    function validateDate($date, $format = 'd/m/Y') {
-        $d = DateTime::createFromFormat($format, $date);
-        return $d && $d->format($format) == $date;
-    }
-    /**
-     * @param string $cpf
-     * @return boolean
-     */
-    function validarCpf($cpf){
-        $validacao_primeiro_digito = 0;
-        $posicao_digito = 0;
-        for($i = 10; $i > 1; $i++){
-            $valor_digito = intval($cpf[$posicao_digito]);
-            $validacao_primeiro_digito += $valor_digito * $i;
-            $posicao_digito++;
-        }
 
-        $validacao_primeiro_digito = $validacao_primeiro_digito * 10;
-        $validacao_primeiro_digito = $validacao_primeiro_digito % 11;
-        if(!$validacao_primeiro_digito == $cpf[9]){
-            return false;
-        }
-        $validacao_segundo_digito = 0;
-        $posicao_digito = 0;
-        for($i = 11; $i > 1; $i++){
-            $valor_digito = intval($cpf[$posicao_digito]);
-            $validacao_primeiro_digito += $valor_digito * $i;
-            $posicao_digito++;
-        }
 
-        $validacao_segundo_digito = $validacao_segundo_digito * 10;
-        $validacao_segundo_digito = $validacao_segundo_digito * 10;
-        if(!$validacao_segundo_digito == $cpf[10]){
-            return false;
-        }
-        return true;
-    }
 
 
 

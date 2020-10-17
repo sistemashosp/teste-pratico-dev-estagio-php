@@ -1,15 +1,24 @@
 <?php
-
-
 class Validador{
 
     /**
+     * Validador
+     *
+     * Responsável por agrupar as funções diversas de validação de dados.
+     */
+
+
+
+
+    /**
+     * Responsável por validar datas de acordo com o formado dia/mes/ano.
      * @param string $date
      * @param string $format
      * @return boolean
      *
      */
-    public static function validateDate($date, $format = 'd/m/Y')
+
+    public static function validarData($date, $format = 'd/m/Y')
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
@@ -17,6 +26,7 @@ class Validador{
 
 
     /**
+     * Responsável por validar um CPF, não garante que está cadastrado de fato na receita, apenas que é válido.
      * @param string $cpf
      * @return boolean
      *

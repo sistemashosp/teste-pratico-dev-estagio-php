@@ -30,7 +30,7 @@ for ($i = 1;$i < sizeof($arquivo);$i++){
         $estado = (str_ireplace('"', "", $paciente_atual[8]));
         $cep = (str_ireplace('"', "", $paciente_atual[9]));
         $cpf = (str_ireplace('"', "", $paciente_atual[10]));
-         array_push($lista_pacientes, new Paciente($nome, $sobrenome, $email, $data_formatada, $genero,
+        array_push($lista_pacientes, new Paciente($nome, $sobrenome, $email, $data_formatada, $genero,
                                                         $fator_rh, $endereco, $cidade, $estado, $cep, $cpf));
     }
     catch(EmailInvalidoException $ex){
@@ -46,22 +46,24 @@ for ($i = 1;$i < sizeof($arquivo);$i++){
     }
 
 }
+
 echo "<h1 style='color: #2197f4; text-align: center'>Relatório de pacientes cadastrados</h1>";
 if ($emails_invalidos > 0){
-    echo "<p style='text-align: center; color: red'>$emails_invalidos emails inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
+    echo "<p style='text-align: center; color: red; font-weight: bold'>$emails_invalidos registros possuem emails inválidos e não foram inseridos na tabela.</p>";
 }
 if ($datas_invalidas > 0){
-    echo "<p style='text-align: center; color: red'>$datas_invalidas datas inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
+    echo "<p style='text-align: center; color: red; font-weight: bold'>$datas_invalidas registros possuem datas de nascimento inválidos e não foram inseridos na tabela.</p>";
 }
 if ($cpfs_invalidos > 0){
-    echo "<p style='text-align: center; color: red'>$cpfs_invalidos cpfs inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
+    echo "<p style='text-align: center; color: red; font-weight: bold'>$cpfs_invalidos registros possuem cpfs inválidos e não foram inseridos na tabela.</p>";
 }
 if ($erro_arquivo > 0){
-    echo "<p style='text-align: center; color: red'>$cpfs_invalidos linhas de sua planilha podem ter causado problemas.</p>";
+    echo "<p style='text-align: center; color: red; font-weight: bold'>$erro_arquivo registros possuem alguma inconsistência e não foram inseridos na tabela.</p>";
 }
 if ($emails_invalidos > 0 || $datas_invalidas > 0 || $cpfs_invalidos > 0 || $erro_arquivo > 0){
-    echo "<p style='text-align: center; color: red'>A sua planilha deve estar de acordo 
+    echo "<p style='text-align: center; color: #2197f4; font-weight: bold'>A sua planilha deve estar de acordo 
           com os campos abaixo para que o paciente seja cadastrado revise seu arquivo CSV</p>";
+    echo "<p style='text-align: center; color: #2197f4; font-weight: bold'>O email e CPF devem ser válidos e a data nascimento deve respeitar o formato DD/MM/AAAA</p>";
 }
 
 echo "<div style='width: 960px; margin: 0 auto'>";
