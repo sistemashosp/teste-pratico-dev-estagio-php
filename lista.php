@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 
 require_once 'models/Paciente.php';
-
+require_once 'models/Validador.php';
 $nome_arquivo = 'pacientes.csv';
 if (!file_exists($nome_arquivo)){
     echo "<h1 style='text-align: center; color: red'>Arquivo $nome_arquivo não encontrado, revise seu diretório raiz</h1>";
@@ -30,7 +30,7 @@ for ($i = 1;$i < sizeof($arquivo);$i++){
         $estado = (str_ireplace('"', "", $paciente_atual[8]));
         $cep = (str_ireplace('"', "", $paciente_atual[9]));
         $cpf = (str_ireplace('"', "", $paciente_atual[10]));
-        array_push($lista_pacientes, new Paciente($nome, $sobrenome, $email, $data_formatada, $genero,
+         array_push($lista_pacientes, new Paciente($nome, $sobrenome, $email, $data_formatada, $genero,
                                                         $fator_rh, $endereco, $cidade, $estado, $cep, $cpf));
     }
     catch(EmailInvalidoException $ex){
@@ -46,16 +46,15 @@ for ($i = 1;$i < sizeof($arquivo);$i++){
     }
 
 }
-
 echo "<h1 style='color: #2197f4; text-align: center'>Relatório de pacientes cadastrados</h1>";
 if ($emails_invalidos > 0){
-    echo "<p style='text-align: center; color: red'>$emails_invalidos emails inválidos tentaram ser cadastrados.</p>";
+    echo "<p style='text-align: center; color: red'>$emails_invalidos emails inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
 }
 if ($datas_invalidas > 0){
-    echo "<p style='text-align: center; color: red'>$datas_invalidas datas inválidos tentaram ser cadastrados.</p>";
+    echo "<p style='text-align: center; color: red'>$datas_invalidas datas inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
 }
 if ($cpfs_invalidos > 0){
-    echo "<p style='text-align: center; color: red'>$cpfs_invalidos cpf inválidos tentaram ser cadastrados.</p>";
+    echo "<p style='text-align: center; color: red'>$cpfs_invalidos cpfs inválidos tentaram ser cadastrados e não foram inseridos na tabela.</p>";
 }
 if ($erro_arquivo > 0){
     echo "<p style='text-align: center; color: red'>$cpfs_invalidos linhas de sua planilha podem ter causado problemas.</p>";
@@ -70,6 +69,7 @@ echo "<table style='border: #2197f4 3px solid' cellspacing='3px'>";
 echo "<tr style='text-align: center; background: #ffa726;'>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Nome" . "</td>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Sobrenome" . "</td>";
+echo "<td style='text-align: center; background: #ffa726'>" . "CPF" . "</td>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Email" . "</td>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Data de nascimento" . "</td>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Genero" . "</td>";
@@ -78,7 +78,6 @@ echo "<td style='text-align: center; background: #ffa726'>" . "Endereço" . "</t
 echo "<td style='text-align: center; background: #ffa726'>" . "Cidade" . "</td>";
 echo "<td style='text-align: center; background: #ffa726'>" . "Estado" . "</td>";
 echo "<td style='text-align: center; background: #ffa726' >" . "Cep" . "</td>";
-echo "<td style='text-align: center; background: #ffa726'>" . "CPF" . "</td>";
 echo "</tr>";
 
 $coluna = 0;
@@ -87,6 +86,7 @@ foreach ($lista_pacientes as $paciente){
         echo "<tr>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getNome() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getSobrenome() . "</td>";
+        echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getCpf() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getEmail() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getDatanascimento() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getGenero() . "</td>";
@@ -95,13 +95,13 @@ foreach ($lista_pacientes as $paciente){
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getCidade() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getEstado() . "</td>";
         echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getCep() . "</td>";
-        echo "<td style='text-align: center; background: #2197f4'>" . $paciente->getCpf() . "</td>";
         echo "</tr>";
     }
     else{
         echo "<tr>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getNome() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getSobrenome() . "</td>";
+        echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getCpf() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getEmail() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getDatanascimento() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getGenero() . "</td>";
@@ -110,10 +110,8 @@ foreach ($lista_pacientes as $paciente){
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getCidade() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getEstado() . "</td>";
         echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getCep() . "</td>";
-        echo "<td style='text-align: center; background: #ffa726'>" . $paciente->getCpf() . "</td>";
         echo "</tr>";
     }
-
     $coluna++;
 }
 echo "</table>";
