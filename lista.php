@@ -27,27 +27,27 @@ function validaCPF($cpf){
  
 function LerPacientesCSV(){
  
-    $delimitador = ',';
+    $delimit = ',';
     $cerca = '"';
  
     // Abrir arquivo para leitura
     $f = fopen('pacientes.csv', 'r');
     if ($f) {
         
-        $cabecalho = fgetcsv($f, 0, $delimitador, $cerca);
+        $cabecalho = fgetcsv($f, 0, $delimit, $cerca);
  
         while (!feof($f)) {
  
-            $linha = fgetcsv($f, 0, $delimitador, $cerca);
+            $linha = fgetcsv($f, 0, $delimit, $cerca);
             if (!$linha) {
                 continue;
             }
  
             $registro = array_combine($cabecalho, $linha);
             
-            $arr_tipo = ['A+','B+','O+','AB+','A-','O-','B-','AB-'];
+            $arr_type = ['A+','B+','O+','AB+','A-','O-','B-','AB-'];
  
-            if(in_array($registro['tiposanguineo'],$arr_tipo)){
+            if(in_array($registro['tiposanguineo'],$arr_type)){
                 $tipo_sanguineo = $registro['tiposanguineo'];
             }else{
                 $tipo_sanguineo = 0;
