@@ -29,7 +29,7 @@ Todos os arquivos estão neste branch
 
 ## Avaliação
 
-Demonstrar habilidade em escrever programas com linguagem PHP utilizando conexão com banco de dados Postgresql.
+Demonstrar habilidade em escrever programas com linguagem PHP.
 
 - Validação de dados
 - Otimização de código
