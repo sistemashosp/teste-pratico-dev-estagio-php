@@ -15,4 +15,12 @@ function storeAllPatients(){
         }
 
 }
+function storedQuantity($listinha=array()){
+    $i=0;
+        foreach($listinha as &$dado){
+            $i=$i+1;        
+        }
+        echo "<br/>você tem $i cadasdtros";
+
+    }
 ?>
