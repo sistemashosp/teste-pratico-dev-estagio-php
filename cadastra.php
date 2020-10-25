@@ -3,6 +3,10 @@
 // your code here
 function cadastra(){
   global $paginac;
+  global $cadastrosCsv;
+  global $cabecalho;  
+  $cadastrosCsv= fopen('pacientes.csv','r');
+  $cabecalho = fgetcsv($GLOBALS['cadastrosCsv'],1000,','); 
   $paginac=0;
 
   function showTablePacients($listinha,$i){
@@ -49,32 +53,73 @@ function cadastra(){
                   echo "</tr>";
   }
 
-  function storeAllPatients(){
-      $cadastrosCsv = fopen('pacientes.csv','r');
-      $listinha = array();   
+  function showHeaders(){
+    $listinha = array();       
+    $listinha[] = array_combine($GLOBALS['cabecalho'],$GLOBALS['cabecalho']);  
+    echo '<strong>'   ;
+      showTablePacients($listinha,0);
+    echo '<strong/>'   ;
+  }
 
-          $cabecalho = fgetcsv($cadastrosCsv,1000,',');    
-          $dados = fgetcsv($cadastrosCsv,1000,',');
-          $listinha[] = array_combine($cabecalho,$cabecalho);
+  function showPatients(){
       
+          $listinha= array();
+      
+          $dados = fgetcsv($GLOBALS['cadastrosCsv'],1000,','); 
           
-          echo "<table>";
           $paginac=$GLOBALS['paginac'];
           while(($dados)&&($paginac<5)){      
               
-              $listinha[] = array_combine($cabecalho,$dados);    
-              $dados = fgetcsv($cadastrosCsv,1000,','); 
+              $listinha[] = array_combine($GLOBALS['cabecalho'],$dados);    
+              $dados = fgetcsv($GLOBALS['cadastrosCsv'],1000,','); 
+
               showTablePacients($listinha,$paginac);
+
               $paginac++;
         
           }
-          echo "</table>";
           
 
   }
-    storeAllPatients();
+  echo "<div><div/>";
+  
+  echo "<div/>";
+  echo "<table>";
+    showHeaders();
+    showPatients();
+    echo "</table>";
+
     }
-  function insertJavascript(){}  
+  function insertJavascript(){
+    $Jscript = "
+    <script type='text/javascript'>
+    
+      
+    function botaozao(){
+      document.addEventListener('click', function(){
+        document.querySelector('body div div')
+        .appendChild(document
+            .createElement('button')
+            ).innerHTML='aa'
+            ;
+      });
+      alert('reloaded');
+      
+  }
+  window.addEventListener('load',function(ev){
+  setTimeout(botaozao,1000);
+  
+  });
+  
+  
+    
+
+    
+    </script>
+    ";
+    echo $Jscript;
+
+  }  
     
 
   function storedQuantity($listinha=array()){
@@ -85,5 +130,10 @@ function cadastra(){
         echo "<br/>você tem $i cadasdtros";
 
     }
-    cadastra();
+
+
+
+insertJavascript();
+cadastra();
+
 ?>
