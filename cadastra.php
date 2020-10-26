@@ -9,9 +9,8 @@ function cadastra(){
   $cabecalho = fgetcsv($GLOBALS['cadastrosCsv'],1000,','); 
   $paginac=0;
 
-  function showTablePacients($listinha,$i){
-    echo "<tr >";
-                  
+  function showTablePacients($listinha,$i){    
+    echo "<tr >";                  
                       echo "<td style='padding:0.2em;'>";
                         echo $listinha[$i]['nome'];
                       echo "</td>";
@@ -51,6 +50,13 @@ function cadastra(){
                       echo "</td>";
                     
                   echo "</tr>";
+                
+  }
+
+  function tryShowTablePacients($listinha,$i){
+    if((($data=strtotime($listinha[$i]['datanascimento']))>0)){
+      showTablePacients($listinha,$i);
+    }
   }
 
   function showHeaders(){
@@ -81,13 +87,16 @@ function cadastra(){
           
 
   }
-  echo "<div><div/>";
   
   echo "<div/>";
   echo "<table>";
     showHeaders();
     showPatients();
-    echo "</table>";
+  echo "</table>";
+  
+    echo "why";
+
+
 
     }
   function insertJavascript(){
@@ -96,16 +105,24 @@ function cadastra(){
     
       
     function botaozao(){
-      document.addEventListener('click', function(){
-        document.querySelector('body div div')
-        .appendChild(document
-            .createElement('button')
-            ).innerHTML='aa'
-            ;
-      });
-      alert('reloaded');
-      
-  }
+        
+      document
+      .querySelector('body div')
+      .appendChild(document
+          .createElement('button')
+          
+          )
+          .addEventListener('click', function(){
+            alert('wrath');
+              eval('<?php showPatients() ?>');
+            alert('wrath');
+          }         
+    );
+    document
+      .querySelector('body div button')
+      .innerHTML='s';
+      }
+
   window.addEventListener('load',function(ev){
   setTimeout(botaozao,1000);
   
