@@ -53,10 +53,14 @@ function cadastra(){
                 
   }
 
-  function tryShowTablePacients($listinha,$i){
-    if((($data=strtotime($listinha[$i]['datanascimento']))>0)){
+  function filterShowTablePacients($listinha,$i){
+    $data= strtotime(
+      $listinha[$i]['datanascimento']
+    //"8/12/1945"
+    );
+    if(!$data=='')
       showTablePacients($listinha,$i);
-    }
+    
   }
 
   function showHeaders(){
@@ -79,7 +83,8 @@ function cadastra(){
               $listinha[] = array_combine($GLOBALS['cabecalho'],$dados);    
               $dados = fgetcsv($GLOBALS['cadastrosCsv'],1000,','); 
 
-              showTablePacients($listinha,$paginac);
+              //showTablePacients($listinha,$paginac);
+              filterShowTablePacients($listinha,$paginac);
 
               $paginac++;
         
