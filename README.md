@@ -45,8 +45,6 @@ O tempo disponibilizado para o teste é de:
 
 Para começar, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
 
-Caso ainda não tenha se cadastrado, acesse https://app.pipefy.com/public/form/cE1e8WsR para se cadastrar para a vaga.
-
 ## Dica do GIT
 
 Neste vídeo ensina como você pode fazer o Fork do nosso repositório e entregar com o push request. https://youtu.be/gJCwWlB3XX0
