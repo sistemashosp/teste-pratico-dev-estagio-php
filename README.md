@@ -1,6 +1,6 @@
 # Teste prático para Estágio para Desenvolvimento PHP
 
-Este é o teste prático para candidatos à vaga de desenvolvimento PHP do Shosp.
+Este é o teste prático para candidatos à vaga de desenvolvimento PHP.
 
 **Requisitos:**
 - Conhecimento da Linguagem PHP
