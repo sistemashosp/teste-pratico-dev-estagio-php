@@ -1,6 +1,5 @@
 <?php
-//echo "Seu código aqui"; 
-  
+
     function ValidaCPF($cpf) {
         
         // Extrai somente os números
@@ -29,6 +28,7 @@
         return $cpf;
 
     }
+
     //exibirTabela
     function ExibeTabela($registro){
         //exibir
@@ -69,7 +69,6 @@
         echo "</tr>";
         echo "</table>";
     }
-
 
     function LerArquivo($modo){
         //abrir e testar csv
